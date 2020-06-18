@@ -7,6 +7,9 @@ import { PrivateRoute } from '@/_components';
 import { HomePage } from '@/HomePage';
 import { LoginPage } from '@/LoginPage';
 import { RegisterPage } from '@/RegisterPage';
+import { ScriptPage } from '@/ScriptPage';
+import { AdminPage } from '@/AdminPage';
+
 
 class App extends React.Component {
     constructor(props) {
@@ -35,19 +38,23 @@ class App extends React.Component {
                         <nav className="navbar navbar-expand navbar-dark bg-dark">
                             <div className="navbar-nav">
                                 <Link to="/" className="nav-item nav-link">Home</Link>
+                                <Link to="/script" className="nav-item nav-link">Scripts</Link>
+                                <Link to="/admin" className="nav-item nav-link">Admin</Link>
                                 <a onClick={this.logout} className="nav-item nav-link">Logout</a>
                             </div>
                         </nav>
                     }
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-md-6 offset-md-3">
-                                    <PrivateRoute exact path="/" component={HomePage} />
-                                    <Route path="/login" component={LoginPage} />
-                                    <Route path="/register" component={RegisterPage} />
-                                </div>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-6 offset-md-3">
+                                <PrivateRoute exact path="/" component={HomePage} />
+                                <Route path="/login" component={LoginPage} />
+                                <Route path="/register" component={RegisterPage} />
+                                <Route path="/script" component={ScriptPage} />
+                                <Route path="/admin" component={AdminPage}/>
                             </div>
                         </div>
+                    </div>
                 </div>
             </Router>
         );

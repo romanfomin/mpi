@@ -34,7 +34,7 @@ class RegisterPage extends React.Component {
                         authenticationService.register(username, password, email)
                             .then(
                                 user => {
-                                    const { from } = this.props.location.state || { from: { pathname: "/" } };
+                                    const { from } = {from: {pathname: "/login"}}  //this.props.location.state || { from: { pathname: "/" } };
                                     this.props.history.push(from);
                                 },
                                 error => {

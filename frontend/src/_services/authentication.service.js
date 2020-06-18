@@ -43,9 +43,9 @@ function register(username, password, email) {
         .then(handleResponse)
         .then(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            currentUserSubject.next(user);
-
+            // localStorage.setItem('currentUser', JSON.stringify(user));
+            // currentUserSubject.next(user);
+            return null;
             return user;
         });
 }
@@ -55,3 +55,5 @@ function logout() {
     localStorage.removeItem('currentUser');
     currentUserSubject.next(null);
 }
+
+

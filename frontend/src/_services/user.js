@@ -31,7 +31,7 @@ function update(id, roles){
   const requestOptions = {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ id, roles })
+    body: JSON.stringify(roles)
   };
-  return fetch(usersUrl + '/' + id, addAuthHeader(requestOptions)).then(handleResponse);
+  return fetch(usersUrl + '/' + id + '/updateroles/', addAuthHeader(requestOptions)).then(handleResponse);
 }

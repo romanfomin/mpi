@@ -84,6 +84,7 @@ class AdminPage extends React.Component {
             console.log(this.state.selected[event.target.value].includes(role.id))
             return this.state.selected[event.target.value].includes(role.id)
         })
+        roles = roles.map(role => {return {name: role.name}})
         console.log(roles)
         userService.update(event.target.value, roles)
     }

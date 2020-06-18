@@ -82,7 +82,7 @@ class ScriptPage extends React.Component {
 
     render() {
         const textareaStyle = {
-            height: "400px"
+            height: "350px"
         }
         return (
             <div>

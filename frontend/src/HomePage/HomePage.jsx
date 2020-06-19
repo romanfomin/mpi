@@ -7,7 +7,7 @@ class HomePage extends React.Component {
         super(props);
 
         this.state = {
-            currentUser: authenticationService.currentUserValue,
+            currentUser: authenticationService.currentUserValue
         };
     }
 

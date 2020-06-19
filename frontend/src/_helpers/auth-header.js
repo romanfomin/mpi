@@ -9,3 +9,10 @@ export function authHeader() {
         return {};
     }
 }
+
+export function addAuthHeader(requestOptions){
+    requestOptions.headers = Object.assign({}, requestOptions.headers, authHeader());
+    console.log('scripts:' )
+    console.log(requestOptions)
+    return requestOptions
+}

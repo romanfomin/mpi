@@ -42,11 +42,12 @@ public class ScriptController {
 
     @PutMapping(value = "/{scriptId}")
     @PreAuthorize("hasRole('SCRIPTWRITER')")
-    public Script updateScript(@PathVariable Long scriptId, @RequestBody Script script) throws BadRequestException {
+    public Script updateScript(@PathVariable Long scriptId, @RequestBody Script script) throws BadRequestException, ResourceNotFoundException {
         if (!script.getId().equals(scriptId)) {
             throw new BadRequestException("Script id mismatch");
         }
-        scriptService.save(script);
-        return scriptService.save(script);
+        Script scriptById = scriptService.getById(script.getId());
+        scriptById.setText(script.getText());
+        return scriptService.save(scriptById);
     }
 }

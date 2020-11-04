@@ -21,19 +21,13 @@ public class ScriptService {
     }
 
     public Script getById(Long id) throws ResourceNotFoundException {
-        Optional<Script> script = scriptRepository.findById(id);
-        if (!script.isPresent()) {
-            throw new ResourceNotFoundException("Script with id=" + id + " not found");
-        }
-        return script.get();
+        return scriptRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Script with id=" + id + " not found"));
     }
 
     public Script getByDate(Date airDate) throws ResourceNotFoundException {
-        Script script = scriptRepository.findByAirDate(airDate);
-        if (script == null) {
-            throw new ResourceNotFoundException("Script with date=" + airDate + " not found");
-        }
-        return script;
+        return scriptRepository.findByAirDate(airDate)
+                .orElseThrow(() -> new ResourceNotFoundException("Script with date=" + airDate + " not found"));
     }
 
     public Script save(Script script) {

@@ -24,6 +24,10 @@ public class Application {
     @JoinColumn(name = "state_id", nullable = false)
     private ApplicationState state;
 
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "type_id", nullable = false)
+    private ApplicationType type;
+
     @ManyToMany(fetch = FetchType.EAGER/*,
                 cascade=CascadeType.ALL*/)
     @JoinTable(	name = "applications_to_files",
@@ -34,11 +38,12 @@ public class Application {
     public Application() {
     }
 
-    public Application(Date appDate, String name, Integer price, ApplicationState state) {
+    public Application(Date appDate, String name, Integer price, ApplicationState state, ApplicationType type) {
         this.appDate = appDate;
         this.name = name;
         this.price = price;
         this.state = state;
+        this.type = type;
     }
 
     public Long getId() {
@@ -87,5 +92,13 @@ public class Application {
 
     public void setFiles(List<File> files) {
         this.files = files;
+    }
+
+    public ApplicationType getType() {
+        return type;
+    }
+
+    public void setType(ApplicationType type) {
+        this.type = type;
     }
 }

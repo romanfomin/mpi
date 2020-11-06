@@ -14,7 +14,11 @@ public class File {
 
     private String name;
 
-    private String type;
+    private String contentType;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "file_type_id", nullable = false)
+    private FileType fileType;
 
     @Lob
     @JsonIgnore
@@ -23,9 +27,10 @@ public class File {
     public File() {
     }
 
-    public File(String name, String type, byte[] data) {
+    public File(String name, String contentType, FileType fileType, byte[] data) {
         this.name = name;
-        this.type = type;
+        this.contentType = contentType;
+        this.fileType = fileType;
         this.data = data;
     }
 
@@ -41,12 +46,12 @@ public class File {
         this.name = name;
     }
 
-    public String getType() {
-        return type;
+    public String getContentType() {
+        return contentType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
     }
 
     public byte[] getData() {
@@ -57,4 +62,11 @@ public class File {
         this.data = data;
     }
 
+    public FileType getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(FileType fileType) {
+        this.fileType = fileType;
+    }
 }

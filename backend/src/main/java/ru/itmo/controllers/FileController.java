@@ -8,10 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.itmo.exceptions.ResourceNotFoundException;
-import ru.itmo.models.Application;
-import ru.itmo.models.ApplicationState;
-import ru.itmo.models.EApplicationState;
-import ru.itmo.models.File;
+import ru.itmo.models.*;
 import ru.itmo.sevices.ApplicationService;
 import ru.itmo.sevices.ApplicationStateService;
 import ru.itmo.sevices.FileService;
@@ -28,6 +25,12 @@ public class FileController {
 
     @Autowired
     private FileService fileService;
+
+    @GetMapping(value = "/types")
+    @PreAuthorize("isAuthenticated()")
+    public List<FileType> getFileTypes() {
+        return fileService.getFileTypes();
+    }
 
     @GetMapping(value = "/{fileId}")
     @PreAuthorize("isAuthenticated()")

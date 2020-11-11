@@ -30,8 +30,16 @@ public class ScriptController {
 
     @GetMapping(value = "/{airDate}")
     @PreAuthorize("isAuthenticated()")
-    public Script getScriptByDate(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date airDate) throws ResourceNotFoundException {
-        return scriptService.getByDate(airDate);
+    public Script getScriptByDate(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date airDate) {
+        Script script;
+        try {
+            script = scriptService.getByDate(airDate);
+        } catch (ResourceNotFoundException e) {
+            Script newScript = new Script();
+            newScript.setAirDate(airDate);
+            script = scriptService.save(newScript);
+        }
+        return script;
     }
 
     @PostMapping

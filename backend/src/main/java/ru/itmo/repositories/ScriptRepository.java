@@ -5,8 +5,9 @@ import org.springframework.stereotype.Repository;
 import ru.itmo.models.Script;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Repository
 public interface ScriptRepository extends JpaRepository<Script, Long> {
-    Script findByAirDate(Date date);
+    Optional<Script> findByAirDate(Date date);
 }

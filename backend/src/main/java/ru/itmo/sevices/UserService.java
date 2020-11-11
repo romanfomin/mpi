@@ -27,22 +27,17 @@ public class UserService {
     }
 
     public User getById(Long id) throws ResourceNotFoundException {
-        Optional<User> user = userRepository.findById(id);
-        if (!user.isPresent()) {
-            throw new ResourceNotFoundException("User with id=" + id + "not found");
-        }
-        return user.get();
+        return userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User with id=" + id + "not found"));
     }
 
-    public User updateUser(User user) {
+    public User updateUser(User user) throws ResourceNotFoundException {
         Set<Role> newRoles = user.getRoles();
         Set<Role> roles = new HashSet<>();
         for(Role role: newRoles) {
-            Optional<Role> roleByName = roleRepository.findByName(role.getName());
-            if (!roleByName.isPresent()) {
-                throw new RuntimeException("Error: Role is not found.");
-            }
-            roles.add(roleByName.get());
+            Role roleByName = roleRepository.findByName(role.getName())
+                    .orElseThrow(() -> new ResourceNotFoundException("Error: Role is not found."));
+            roles.add(roleByName);
         }
         user.setRoles(roles);
         return userRepository.save(user);

@@ -34,7 +34,7 @@ public class ApplicationController {
     private FileService fileService;
 
     @GetMapping
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ADVERTISER') or hasRole('OPERATOR') or hasRole('MANAGER') or hasRole('DECORATOR')")
     @Transactional
     public List<Application> getApplications(@RequestParam(value = "type") EApplicationType type) {
         return applicationService.getApplications(type);
@@ -53,7 +53,7 @@ public class ApplicationController {
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @PreAuthorize("hasRole('ADVERTISER')")
+    @PreAuthorize("hasRole('ADVERTISER') or hasRole('OPERATOR')")
     @Transactional
     public Application createApplication(Application application,
                                          @RequestParam(value = "app_type") EApplicationType type,
@@ -63,7 +63,7 @@ public class ApplicationController {
     }
 
     @PutMapping(value = "/{applicationId}/state")
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('DECORATOR')")
     public Application updateState(@PathVariable Long applicationId,
                                    @RequestParam(value = "state") EApplicationState state) throws ResourceNotFoundException {
         Application applicationById = applicationService.getById(applicationId);
@@ -74,7 +74,7 @@ public class ApplicationController {
 
     @PostMapping(value = "/{applicationId}/files",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @PreAuthorize("hasRole('ADVERTISER') or hasRole('MANAGER')")
+    @PreAuthorize("isAuthenticated()")
     @Transactional
     public Application addFiles(@PathVariable Long applicationId,
                                 @RequestParam(value = "file_type") EFileType type,

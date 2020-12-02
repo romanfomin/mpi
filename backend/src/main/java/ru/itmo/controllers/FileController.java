@@ -27,13 +27,11 @@ public class FileController {
     private FileService fileService;
 
     @GetMapping(value = "/types")
-    @PreAuthorize("isAuthenticated()")
     public List<FileType> getFileTypes() {
         return fileService.getFileTypes();
     }
 
     @GetMapping(value = "/{fileId}")
-    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<byte[]> getFile(@PathVariable Long fileId) throws ResourceNotFoundException {
         File file = fileService.getFile(fileId);
 

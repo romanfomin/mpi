@@ -42,7 +42,7 @@ public class ApplicationService {
         application.setState(applicationState);
         application.setType(applicationType);
         application.setFiles(files);
-        application.setAppDate(new Date());
+//        application.setAppDate(new Date());
         return applicationRepository.save(application);
     }
 }

@@ -6,5 +6,7 @@ public enum ERole {
     ROLE_ACTOR,
     ROLE_MANAGER,
     ROLE_ADVERTISER,
-    ROLE_ADMIN
+    ROLE_ADMIN,
+    ROLE_OPERATOR,
+    ROLE_DECORATOR
 }

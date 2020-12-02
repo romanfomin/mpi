@@ -29,7 +29,9 @@ class App extends React.Component {
     logout() {
         authenticationService.logout();
         console.log('logout')
+        if (process.env.REACT_APP_SUB_PATH != undefined){
         history.push(process.env.REACT_APP_SUB_PATH.replace('http://','') + '/login');
+    }
     }
 
     render() {

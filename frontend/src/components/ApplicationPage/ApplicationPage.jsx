@@ -31,7 +31,7 @@ class ApplicationsTable extends React.Component {
                             <td>{application.price}</td>
                             <td>{application.state.name}</td>
                             <td>{application.type.name}</td>
-                            <th>{application.files && application.files.map((file) => <a id={file.id} onClick={(event) =>{applicationService.getFile(event.target.id)}}>{file.name}</a>)}</th>
+                            <th>{application.files && application.files.map((file) => <a id={file.id} href={`${process.env.REACT_APP_API_URL}/api/files/${file.id}`}>{file.name}</a>)}</th>
                         </tr>
                     )}
                 </tbody>

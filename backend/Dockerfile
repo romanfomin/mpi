@@ -2,6 +2,7 @@ FROM maven:3-openjdk-8 as builder
 WORKDIR /app
 COPY . .
 ENV MAVEN_OPTS="-Dmaven.repo.local=/app/.m2"
+RUN sed -i'' -e 's/localhost/postgres/g' src/main/resources/application.properties
 RUN mvn package
 
 FROM openjdk:8-jdk-alpine

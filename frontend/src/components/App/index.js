@@ -12,6 +12,8 @@ import { ApplicationAddPage } from '../ApplicationAddPage';
 import { ApplicationPage } from '../ApplicationPage';
 import {history} from '../_helpers'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+
 
 class App extends React.Component {
     constructor(props) {
@@ -53,7 +55,7 @@ class App extends React.Component {
                     }
                     <div className="container">
                         <div className="row">
-                            <div className="col-md-6 offset-md-3">
+                            <div className="col-md-12">
                                 <PrivateRoute exact path="/" component={HomePage} />
                                 <Route path="/login" component={LoginPage} />
                                 <Route path="/register" component={RegisterPage} />

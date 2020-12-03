@@ -9,6 +9,7 @@ export const applicationService = {
   getAllStates,
   create,
   update,
+  updateStates
 };
 
 // function getFile(id, callback) {
@@ -58,6 +59,19 @@ function getAllStates() {
     headers: { "Content-Type": "application/json" },
   };
   return fetch(applicationsUrl + "/states", addAuthHeader(requestOptions)).then(
+    handleResponse
+  );
+}
+
+function updateStates(id, state) {
+  const formData = new FormData();
+  formData.append("state", state);
+  const requestOptions = {
+    method: "PUT",
+    // headers: { "Content-Type": "application/json" },
+    body: formData
+  };
+  return fetch(applicationsUrl + `/${id}/state`, addAuthHeader(requestOptions)).then(
     handleResponse
   );
 }

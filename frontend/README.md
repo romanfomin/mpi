@@ -1,3 +1,15 @@
+# Build app
+
+```sh
+% cat <<-EOF > .env
+# API URL
+REACT_APP_API_URL='http://localhost:50001'
+# PATH FOR ROUTER
+REACT_APP_SUB_PATH=\$npm_package_homepage 
+EOF
+% yarn run build
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

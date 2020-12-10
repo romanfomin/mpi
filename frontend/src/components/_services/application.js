@@ -80,7 +80,7 @@ function create(appDate, comment, price, file, app_type) {
   const formData = new FormData();
   formData.append("name", comment);
   formData.append("price", price);
-  formData.append("app_date", appDate);
+  formData.append("appDate", appDate);
   formData.append("app_type", app_type);
   formData.append("attachments", file);
 

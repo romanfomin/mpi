@@ -1,7 +1,7 @@
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
-import { applicationService } from '../_services';
+import { applicationService, authenticationService } from '../_services';
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 
@@ -60,6 +60,7 @@ class ApplicationAddPage extends React.Component {
             types: null,
             applications: null,
             showForm: false,
+            currentUser: authenticationService.currentUserValue,
         };
 
     }
@@ -81,6 +82,11 @@ class ApplicationAddPage extends React.Component {
     }
 
     render() {
+        const currentUser = this.state.currentUser
+        console.log('cr', currentUser)
+        const type = currentUser.roles.includes('ROLE_OPERATOR') ? 'TYPE_DECORATION' : 'TYPE_AD'
+        console.log('ct', type)
+
         return (
 
             <div className="align-middle">
@@ -91,7 +97,7 @@ class ApplicationAddPage extends React.Component {
                         date: new Date(),
                         file: null,
                         price: 3000,
-                        type: null
+                        type: type
 
                     }}
                     validationSchema={Yup.object().shape({
@@ -100,7 +106,7 @@ class ApplicationAddPage extends React.Component {
                     onSubmit={({ date, comment, price, file, type }, { setStatus, setSubmitting }) => {
                         setStatus();
                         console.log(file)
-                        applicationService.create(date, comment, price, file, 'TYPE_AD')
+                        applicationService.create(date, comment, price, file, type)
                             .then(
                                 user => {
                                     const { from } = this.props.location.state || { from: { pathname: "/application" } };

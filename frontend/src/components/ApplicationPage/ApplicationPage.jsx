@@ -11,11 +11,10 @@ class ApplicationsTable extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            selected: {}
+            selected: {},
+            currentUser: authenticationService.currentUserValue
         };
     }
-
-   
 
     render_head() {
         if (!this.props.applications){
@@ -58,8 +57,10 @@ class ApplicationsTable extends React.Component {
                             <td>{application.appDate}</td>
                             <td>{application.name}</td>
                             <td>{application.price}</td>
-                            {/* <td>{application.state.name}</td> */}
-                            <td className>{this.renderSelect(this.props.statuses, application.state.id, application.id)}</td>
+                            {this.state.currentUser.roles && this.state.currentUser.roles.filter((item) => {return item === 'ROLE_MANAGER' || item === 'ROLE_OPERATOR'}).length > 0 ?
+                            <td className>{this.renderSelect(this.props.statuses, application.state.id, application.id)}</td> :                            
+                            <td>{application.state.name}</td>
+                            }
                             <td>{application.type.name}</td>
                             <th>{application.files && application.files.map((file) => <a id={file.id} href={`${process.env.REACT_APP_API_URL}/api/files/${file.id}`}>{file.name}</a>)}</th>
                         </tr>
@@ -107,7 +108,7 @@ class ApplicationPage extends React.Component {
             <div className="align-middle">
                 <h2>Application</h2>
                 {this.state.statuses !== null && this.state.applications !== null && this.state.applications.length !== 0 ? <ApplicationsTable applications={this.state.applications} statuses={this.state.statuses}/> : <div>No applications found</div>}
-                {this.state.currentUser.roles.includes('ROLE_ADVERTISER') ? <Link to="/application_add" className="btn btn-primary">Add Application</Link> : null}
+                {this.state.currentUser.roles.includes('ROLE_ADVERTISER') || this.state.currentUser.roles.includes('ROLE_OPERATOR') ? <Link to="/application_add" className="btn btn-primary">Add Application</Link> : null}
             </div>
         )
     }

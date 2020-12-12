@@ -6,7 +6,7 @@ services:
       POSTGRES_HOST_AUTH_METHOD: trust
       POSTGRES_DB: testdb
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./init.sql:/init.sql
       - ./postgres:/var/lib/postgresql/data
     ports:
       - 5432:5432
@@ -14,7 +14,8 @@ services:
     build:
       context: backend
     ports:
-      - 8080:8080
+            # - 8080:8080
+      - 50001:8080
   frontend:
     image: node:10
     volumes:

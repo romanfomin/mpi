@@ -94,7 +94,7 @@ class ApplicationAddPage extends React.Component {
                 <Formik
                     initialValues={{
                         comment: '',
-                        date: new Date(),
+                        date: '',
                         file: null,
                         price: 3000,
                         type: type
@@ -122,7 +122,7 @@ class ApplicationAddPage extends React.Component {
 
                         <Form>
                             <div className="form-group">
-                                <label htmlFor="date">Date</label>
+                                <label htmlFor="date">Date (yyyy-mm-dd)</label>
                                 <Field name="date" type="text" className={'form-control' + (errors.date && touched.date ? ' is-invalid' : '')} />
                                 <ErrorMessage name="date" component="div" className="invalid-feedback" />
                             </div>

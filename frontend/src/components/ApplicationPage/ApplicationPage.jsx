@@ -35,8 +35,9 @@ class ApplicationsTable extends React.Component {
             options={options}
             defaultValue = {options.filter((item) => {return item.value === id})}
             onChange={selected => {
+                console.log(`select: ${applicationId}`)
                 console.log(selected)
-                applicationService.updateStates(id, selected.label)
+                applicationService.updateStates(applicationId, selected.label)
             }}
         />
     }

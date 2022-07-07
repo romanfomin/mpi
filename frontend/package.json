@@ -12,7 +12,7 @@
         "@khanacademy/react-multi-select": "^0.3.3",
         "formik": "^1.5.2",
         "history": "^4.9.0",
-        "moment": "^2.26.0",
+        "moment": "^2.29.4",
         "react": "^16.8.6",
         "react-calendar": "^3.1.0",
         "react-dom": "^16.8.6",
